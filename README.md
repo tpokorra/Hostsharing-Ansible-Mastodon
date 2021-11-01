@@ -32,7 +32,7 @@ The option -i can be used to read this inventory file instead of the /etc/ansibl
 
 Now we can reach our site via:
 
-    https://mastadon.example.org
+    https://social.example.org
 
 --- Open Source Hosting ---
  https://www.hostsharing.net
