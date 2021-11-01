@@ -1,0 +1,23 @@
+set daemon 60 with start delay 120
+set logfile /home/pacs/{{pac}}/users/{{user}}/var/log/monit.log
+set idfile /home/pacs/{{pac}}/users/{{user}}/var/run/monit.id
+set statefile /home/pacs/{{pac}}/users/{{user}}/var/run/monit.state
+set mailserver localhost
+set mail-format { from: monit@{{pac}}.hostsharing.net }
+
+check process redis with pidfile /home/pacs/{{pac}}/users/{{user}}/var/run/redis-server.pid
+  start program "/usr/bin/redis-server /home/pacs/{{pac}}/users/{{user}}/etc/redis.conf"
+  stop program "/bin/bash -c '/bin/kill $( cat /home/pacs/{{pac}}/users/{{user}}/var/run/redis-server.pid )'"
+
+check process mstdn_web with pidfile /home/pacs/{{pac}}/users/{{user}}/var/run/puma.pid
+  depends redis
+  start program "/bin/bash -c 'export RAILS_ENV=production && export HOME=/home/pacs/{{pac}}/users/{{user}} && cd $HOME/live && ( $HOME/.rbenv/shims/bundle exec puma -C config/puma.rb -e production -b tcp://127.0.0.1:{{pumaport}} >$HOME/var/log/puma.log 2>&1 &  echo $! > $HOME/var/run/puma.pid  )'"
+  stop program "/bin/bash -c '/bin/kill $( cat /home/pacs/{{pac}}/users/{{user}}/var/run/puma.pid )'"
+check process mstdn_sidekiq with pidfile /home/pacs/{{pac}}/users/{{user}}/var/run/sidekiq.pid
+  depends redis
+  start program "/bin/bash -c 'export RAILS_ENV=production && export DB_POOL=5 && export HOME=/home/pacs/{{pac}}/users/{{user}} && cd $HOME/live && ( $HOME/.rbenv/shims/bundle exec sidekiq -c 5 -q default -q mailers -q pull -q push >$HOME/var/log/sidekiq.log 2>&1 &  echo $! > $HOME/var/run/sidekiq.pid  )'"
+  stop program "/bin/bash -c '/bin/kill $( cat /home/pacs/{{pac}}/users/{{user}}/var/run/sidekiq.pid )'"
+check process mstdn_streaming with pidfile /home/pacs/{{pac}}/users/{{user}}/var/run/streaming.pid
+  depends redis
+  start program "/bin/bash -c 'export HOME=/home/pacs/{{pac}}/users/{{user}} && export NVM_DIR="$HOME/.nvm" && export NVM_BIN=/home/pacs/{{pac}}/users/{{user}}/.nvm/versions/node/{{nodeversion}}/bin && export NODE_ENV=production && export PORT={{streamport}} && export BIND=127.0.0.1 && cd $HOME/live && ( $HOME/.nvm/versions/node/{{nodeversion}}/bin/node streaming/index.js >$HOME/var/log/streaming.log 2>&1 &  echo $! > $HOME/var/run/streaming.pid  )'"
+  stop program "/bin/bash -c '/bin/kill $( cat /home/pacs/{{pac}}/users/{{user}}/var/run/streaming.pid )'"

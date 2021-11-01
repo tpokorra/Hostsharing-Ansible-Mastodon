@@ -1,0 +1,10 @@
+DirectoryIndex disabled
+RewriteEngine On
+RewriteBase /
+RewriteCond %{REQUEST_URI}  ^/api/v1/streaming    [NC]
+RewriteRule .* ws://localhost:{{streamport}}%{REQUEST_URI}  [proxy]
+RequestHeader set X-Forwarded-Proto "https"
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-l
+RewriteRule .* http://localhost:{{pumaport}}%{REQUEST_URI} [proxy]
+RequestHeader set X-Forwarded-Proto "https"
