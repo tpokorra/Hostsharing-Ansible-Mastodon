@@ -1,2 +1,0 @@
-[mastodon]
-xyz00 ansible_ssh_host=tim01.hostsharing.net ansible_ssh_user=xyz00 pac=xyz00 domain=social.example.org user=mastodon password= redispassword=testpassw0rd_changeme redisport=11111 pumaport=32003 streamport=32004 nodeversion=v12.22.7 rubyversion=2.7.2

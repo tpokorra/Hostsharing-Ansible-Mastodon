@@ -28,8 +28,8 @@
   become_user: "{{pac}}-{{user}}"
   shell: |
       . ~/.profile
-      nvm install 12
-      nvm alias default 12
+      nvm install {{noderelease}}
+      nvm alias default {{noderelease}}
   args:
       executable: /bin/bash
       chdir: "/home/pacs/{{pac}}/users/{{user}}/"
