@@ -59,11 +59,14 @@
     git:
       repo: https://github.com/mastodon/mastodon.git
       dest: /home/pacs/{{pac}}/users/{{user}}/live
-  - name: checkout latest mastodon release
+  - name: checkout specific mastodon release
     become: yes
     become_user: "{{pac}}-{{user}}"
     shell: |
-       git checkout $(git tag -l | grep -v 'rc[0-9]*$' | sort -V | tail -n 1)
+       # checkout latest mastodon release
+       # git checkout $(git tag -l | grep -v 'rc[0-9]*$' | sort -V | tail -n 1)
+       # checkout specific release
+       git checkout "{{mastodon_release}}"
     args:
         executable: /bin/bash
         chdir: "/home/pacs/{{pac}}/users/{{user}}/live"
