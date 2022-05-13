@@ -20,7 +20,7 @@ civicrm:
       # see https://github.com/mastodon/mastodon/blob/main/.ruby-version
       rubyversion: 2.7.2
       # see https://github.com/mastodon/mastodon/releases
-      mastodon_release: v3.4.7
+      mastodon_release: v3.5.2
 
       SaasActivationPassword: {{SaasActivationPassword}}
       SaasInstanceStatus: {{SaasInstanceStatus}}
