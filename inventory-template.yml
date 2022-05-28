@@ -1,4 +1,4 @@
-civicrm:
+mastodon:
   hosts:
     {{pac}}:
       ansible_ssh_host: {{pac}}.hostsharing.net
@@ -7,11 +7,11 @@ civicrm:
       domain: {{domain}}
       user: {{username}}
       password: {{password}}
-      redispassword: {{redispassword}}
+      redispassword: {{password1}}
 
-      redisport: {{redisport}}
-      pumaport: {{pumaport}}
-      streamport: {{streamport}}
+      redisport: {{port1}}
+      pumaport: {{port2}}
+      streamport: {{port3}}
 
       # see https://nodejs.org/en/about/releases/
       noderelease: 16
