@@ -16,7 +16,7 @@ mastodon:
       # see https://nodejs.org/en/about/releases/
       noderelease: 16
       # see https://nodejs.org/download/release/latest-v16.x/
-      nodeversion: v16.13.1
+      nodeversion: v16.15.0
       # see https://github.com/mastodon/mastodon/blob/main/.ruby-version
       rubyversion: 3.0.3
       # see https://github.com/mastodon/mastodon/releases
