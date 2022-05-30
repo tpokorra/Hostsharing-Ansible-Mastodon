@@ -16,6 +16,12 @@
   #################################
   ## create directories
   #################################
+  - name: create directory bin
+    become: yes
+    become_user: "{{pac}}-{{user}}"
+    file:
+      path: "/home/pacs/{{pac}}/users/{{user}}/bin"
+      state: directory
   - name: create directory etc
     become: yes
     become_user: "{{pac}}-{{user}}"
@@ -128,6 +134,11 @@
     become: yes
     become_user: "{{pac}}-{{user}}"
     template: dest="/home/pacs/{{pac}}/users/{{user}}/.logrotate" src="templates/logrotate" mode=0600
+
+  - name: upload restart script
+    become: yes
+    become_user: "{{pac}}-{{user}}"
+    template: dest="/home/pacs/{{pac}}/users/{{user}}/bin/restart.sh" src="templates/restart.sh" mode=0700
 
   ######################
   ## initialise instance
