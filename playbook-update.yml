@@ -25,6 +25,17 @@
       executable: /bin/bash
       chdir: "/home/pacs/{{pac}}/users/{{user}}"
 
+  - name: bundle install
+    become: yes
+    become_user: "{{pac}}-{{user}}"
+    shell: |
+       . ~/.profile
+       cd ~/live
+       bundle install || exit -1
+    args:
+      executable: /bin/bash
+      chdir: "/home/pacs/{{pac}}/users/{{user}}"
+
   - name: restart the services
     become: yes
     become_user: "{{pac}}-{{user}}"
