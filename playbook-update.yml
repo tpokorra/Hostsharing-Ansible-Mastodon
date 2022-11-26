@@ -1,0 +1,35 @@
+---
+- hosts: mastodon
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+  tasks:
+
+  - name: checkout specific mastodon release
+    become: yes
+    become_user: "{{pac}}-{{user}}"
+    shell: |
+       # checkout specific release
+       git fetch && git checkout "{{mastodon_release}}" || exit -1
+    args:
+        executable: /bin/bash
+        chdir: "/home/pacs/{{pac}}/users/{{user}}/live"
+
+  - name: initialise assets
+    become: yes
+    become_user: "{{pac}}-{{user}}"
+    shell: |
+       . ~/.profile
+       cd ~/live
+       RAILS_ENV=production bundle exec rails assets:precompile || exit -1
+    args:
+      executable: /bin/bash
+      chdir: "/home/pacs/{{pac}}/users/{{user}}"
+
+  - name: restart the services
+    become: yes
+    become_user: "{{pac}}-{{user}}"
+    shell: |
+       ~/bin/restart.sh || exit -1
+    args:
+      executable: /bin/bash
+      chdir: "/home/pacs/{{pac}}/users/{{user}}/live"
