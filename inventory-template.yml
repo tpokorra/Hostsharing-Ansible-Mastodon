@@ -18,9 +18,9 @@ mastodon:
       # see https://nodejs.org/download/release/latest-v16.x/
       nodeversion: v16.15.0
       # see https://github.com/mastodon/mastodon/blob/main/.ruby-version
-      rubyversion: 3.0.3
+      rubyversion: 3.0.4
       # see https://github.com/mastodon/mastodon/releases
-      mastodon_release: v3.5.5
+      mastodon_release: v4.0.2
 
       SaasActivationPassword: {{SaasActivationPassword}}
       SaasInstanceStatus: {{SaasInstanceStatus}}
