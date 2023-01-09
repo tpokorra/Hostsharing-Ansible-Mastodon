@@ -88,3 +88,9 @@
     args:
       executable: /bin/bash
       chdir: "/home/pacs/{{pac}}/users/{{user}}/live"
+
+  - name: drop the cache folder
+    become: yes
+    file:
+        path: /home/pacs/{{pac}}/users/{{user}}/.cache
+        state: absent
