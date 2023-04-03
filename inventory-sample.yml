@@ -20,4 +20,4 @@ mastodon:
       # see https://github.com/mastodon/mastodon/blob/main/.ruby-version
       rubyversion: 3.0.4
       # see https://github.com/mastodon/mastodon/releases
-      mastodon_release: v4.0.2
+      mastodon_release: v4.1.1
