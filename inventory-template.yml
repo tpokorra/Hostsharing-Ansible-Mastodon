@@ -14,13 +14,13 @@ mastodon:
       streamport: {{port3}}
 
       # see https://nodejs.org/en/about/releases/
-      noderelease: 16
-      # see https://nodejs.org/download/release/latest-v16.x/
-      nodeversion: v16.15.0
+      noderelease: 18
+      # see https://nodejs.org/download/release/latest-v18.x/
+      nodeversion: v18.15.0
       # see https://github.com/mastodon/mastodon/blob/main/.ruby-version
-      rubyversion: 3.0.4
+      rubyversion: 3.0.6
       # see https://github.com/mastodon/mastodon/releases
-      mastodon_release: v4.1.1
+      mastodon_release: v4.1.2
 
       SaasActivationPassword: {{SaasActivationPassword}}
       SaasInstanceStatus: {{SaasInstanceStatus}}

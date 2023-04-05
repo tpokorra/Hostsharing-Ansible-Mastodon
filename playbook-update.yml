@@ -11,7 +11,16 @@
   - name: drop old Ruby version
     become: yes
     file:
-        path: /home/pacs/{{pac}}/users/{{user}}/.rbenv/versions/3.0.3
+        path: /home/pacs/{{pac}}/users/{{user}}/.rbenv/versions/3.0.4
+        state: absent
+
+  - name: upgrade Node
+    import_tasks: tasks/hs_nodejs.yml
+
+  - name: drop old Node version
+    become: yes
+    file:
+        path: /home/pacs/{{pac}}/users/{{user}}/.nvm/versions/node/v16.15.0
         state: absent
 
   - name: checkout specific mastodon release
